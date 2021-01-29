@@ -3,7 +3,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+<<<<<<< HEAD
 
+=======
+>>>>>>> e532d0477417c02e5963a50c951768deed228881
 int main (int argc, char *argv[]){
     int s0;
     struct sockaddr_in addr, clnt;
