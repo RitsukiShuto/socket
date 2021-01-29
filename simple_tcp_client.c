@@ -15,7 +15,7 @@ int main(int argc, char *argv[ ]){
     s0 = socket (AF_INET, SOCK_STREAM, 0);  // ソケット生成
 
     /*サーバ情報設定 localhost ポート番号9999*/
-    serv.sin_family = AF_INET;/*IPv4*/
+    serv.sin_family = AF_INET;  // IPv4
     serv.sin_port = htons(9999);
     inet_pton(AF_INET, "127.0.0.1", &serv.sin_addr.s_addr);
 
@@ -28,6 +28,6 @@ int main(int argc, char *argv[ ]){
     printf("%s\n", data);       // 取得データ表示
 
     close(s0);
-    
+
     return 0;
 }
