@@ -8,11 +8,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-<<<<<<< HEAD
-int main(int argc, char *argv[]){
-=======
 int main (int argc, char *argv[]){
->>>>>>> e532d0477417c02e5963a50c951768deed228881
     int s0, s1;
     struct sockaddr_in addr, clnt;
     int l_clnt = sizeof(clnt), m;
@@ -29,20 +25,13 @@ int main (int argc, char *argv[]){
         return 1;
     }
     /*受付ソケットを再利用可能にする*/
-    setsockopt(s0, SOL_SOCKET, SO_REUSEADDR, &reuse,sizeof(reuse));
+    setsockopt(s0, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 
-<<<<<<< HEAD
-    setsockpt(s0, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));     // 受付ソケットを再利用可能にする
-
-    /* 受付ソケット設定 ポート番号:8080 */
-    addr.sin_family = AF_INET;      // IPv4
-    addr.sin_port = htons(8080);     // htons: バイトオーダをネット用に交換
-=======
     /*受付ソケット設定 ポート番号 8080*/
     addr.sin_family = AF_INET;/*IPv4*/
     addr.sin_port = htons(8080);/*htons: バイトオーダーをネット用に変換*/
+
     addr.sin_addr.s_addr = INADDR_ANY;
->>>>>>> e532d0477417c02e5963a50c951768deed228881
 
     /*ソケットに名前を付ける(アドレスを割り当てる)*/
     if ((bind(s0, (struct sockaddr *)&addr, sizeof(addr))) < 0){
@@ -50,12 +39,14 @@ int main (int argc, char *argv[]){
         close(s0);
         return 1;
     }
+
     /*接続待ち*/
     if (listen(s0, 10) < 0){
         perror("listen");
         close(s0);
         return 1;
     }
+
     /*接続受付*/
     while(1){
     if ((s1 = accept(s0, (struct sockaddr *)&clnt,&l_clnt)) < 0){
@@ -63,8 +54,10 @@ int main (int argc, char *argv[]){
         close(s0);
         return 1;
     }
+
     /*HTTPリクエストを受信*/
     m = read(s1, str_in, sizeof(str_in));
+
     /*応答メッセージ作成*/
     /*まずHTMLで中身を記述*/
     snprintf(content, sizeof(content),
@@ -82,17 +75,12 @@ Content-Type: text/html\r\n\
 
     /*応答メッセージを送信*/
     write(s1, str_out, strlen(str_out) + 1);
+
     /*接続を切断*/
     close(s1);
     }
-<<<<<<< HEAD
-
-    close(s0);  // ソケットを閉じる
-
-=======
     
     /*受付ソケットを閉じる*/
     close(s0);
->>>>>>> e532d0477417c02e5963a50c951768deed228881
     return 0;
 }
