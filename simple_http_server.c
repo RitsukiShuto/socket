@@ -7,8 +7,8 @@
 #include<sys/socket.h>
 #include<netinet/in.h>
 
-int main(argc, char *argv[]){
-    int s0;
+int main(int argc, char *argv[]){
+    int s0, s1;
     struct sockaddr_in addr, clnt;
     int l_clnt = sizeof(clnt), m;
     const int reuse = 1;
@@ -28,7 +28,7 @@ int main(argc, char *argv[]){
 
     /* 受付ソケット設定 ポート番号:8080 */
     addr.sin_family = AF_INET;      // IPv4
-    addr.sinport = htons(8080);     // htons: バイトオーダをネット用に交換
+    addr.sin_port = htons(8080);     // htons: バイトオーダをネット用に交換
 
     /* ソケットにアドレスを割り当てる */
     if((bind(s0, (struct sockaddr *) & addr, sizeof(addr))) < 0){
@@ -78,4 +78,5 @@ Content-Type: text/html\r\n
 
     close(s0);  // ソケットを閉じる
 
+    return 0;
 }
