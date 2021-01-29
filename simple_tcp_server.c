@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-int main (int argc, char *argv[ ]){
+int main (int argc, char *argv[]){
     int s0;
     struct sockaddr_in addr, clnt;
     int s1, l_clnt = sizeof(clnt);
