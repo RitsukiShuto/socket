@@ -11,6 +11,7 @@
 #include <netinet/in.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
 int main(int argc, char *argv[])
 {
     struct sockaddr_in serv;
@@ -89,7 +90,7 @@ int main(int argc, char *argv[])
                 return 1;
             }
 
-            /* "bye bye"‚È‚ç‚ÎÚ‘±‚ğØ’f */
+            /* "bye bye"‚È‚çÚ‘±‚ğØ’f */
             if (strncmp(str, "bye bye", 7) == 0)
             {
                 puts("\e[30m");     // •¶šF‚ğ•‚É–ß‚·
@@ -100,7 +101,7 @@ int main(int argc, char *argv[])
             free(str);
         }
     }
-    puts("\e[30m"); // •¶šF‚ğ•‚É–ß‚·
+    puts("\e[30m");     // •¶šF‚ğ•‚É–ß‚·
     close(s0);
     return 0;
 }

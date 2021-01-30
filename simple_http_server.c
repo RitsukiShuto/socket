@@ -17,8 +17,7 @@ int main(int argc, char *argv[])
     char str_in[4096];
     char content[4096];
     char str_out[4096];
-    char contentstr[] = 
-"<html><body>\r\n\
+    char contentstr[] = "<html><body>\r\n\
 <h1>Hello World! Hoge Hoge Foo Bar!</h1>\r\n\
 </body></html>";
 
