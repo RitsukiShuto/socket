@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
         /* 応答メッセージ作成 */
         /* まずHTMLで中身を記述 */
-        snprintf(content, sizeof(content), contentstr);
+        snprintf(content, sizeof(content), "%s", contentstr);
 
         /* snprintf(content, sizeof(content),
 "<html><body>\r\n\
