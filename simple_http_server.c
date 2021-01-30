@@ -71,19 +71,14 @@ int main(int argc, char *argv[])
         /* まずHTMLで中身を記述 */
         snprintf(content, sizeof(content), "%s", contentstr);
 
-        /* snprintf(content, sizeof(content),
+        snprintf(content, sizeof(content),
 "<html><body>\r\n\
 あなたの送ったHTTPリクエストは以下の通りです。\r\n\
 <pre>%s</pre>\r\n\
-</body></html>",str_in); */
+</body></html>", contentstr);
 
         /* ヘッダと中身で応答メッセージ */
-        /* snprintf(str_out, sizeof(str_out),
-"HTTP/1.0 200 OK\r\n\
-Content-Length: %d\r\n\
-Content-Type: text/html\r\n\
-\r\n\
-%s",strlen(content) + 1, content); */
+        // snprintf(str_out, sizeof(str_out),"%s" ,strlen(content) + 1, contentstr);
 
         /* 応答メッセージを送信 */
         write(s1, str_out, strlen(str_out) + 1);
