@@ -17,6 +17,10 @@ int main(int argc, char *argv[])
     char str_in[4096];
     char content[4096];
     char str_out[4096];
+    char contentstr[] = 
+"<html><body>\r\n\
+<h1>Hello World! Hoge Hoge Foo Bar!</h1>\r\n\
+</body></html>";
 
     memset(str_in, '\0', sizeof(str_in)); // str_inをNULL文字で埋めて初期化
 
@@ -66,21 +70,21 @@ int main(int argc, char *argv[])
 
         /* 応答メッセージ作成 */
         /* まずHTMLで中身を記述 */
-        snprintf(content, sizeof(content),
+        snprintf(content, sizeof(content), contentstr);
+
+        /* snprintf(content, sizeof(content),
 "<html><body>\r\n\
 あなたの送ったHTTPリクエストは以下の通りです。\r\n\
 <pre>%s</pre>\r\n\
-</body></html>",
-                 str_in);
+</body></html>",str_in); */
 
         /* ヘッダと中身で応答メッセージ */
-        snprintf(str_out, sizeof(str_out),
+        /* snprintf(str_out, sizeof(str_out),
 "HTTP/1.0 200 OK\r\n\
 Content-Length: %d\r\n\
 Content-Type: text/html\r\n\
 \r\n\
-%s",
-                 strlen(content) + 1, content);
+%s",strlen(content) + 1, content); */
 
         /* 応答メッセージを送信 */
         write(s1, str_out, strlen(str_out) + 1);
