@@ -21,24 +21,24 @@ int main(int argc, char *argv[])
 <h1>Hello World! Hoge Hoge Foo Bar!</h1>\r\n\
 </body></html>";
 
-    memset(str_in, '\0', sizeof(str_in)); // str_in‚ğNULL•¶š‚Å–„‚ß‚Ä‰Šú‰»
+    memset(str_in, '\0', sizeof(str_in)); // str_inã‚’NULLæ–‡å­—ã§åŸ‹ã‚ã¦åˆæœŸåŒ–
 
-    /* ó•tƒ\ƒPƒbƒg¶¬ */
+    /* å—ä»˜ã‚½ã‚±ãƒƒãƒˆç”Ÿæˆ */
     if ((s0 = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         perror("socket");
         return 1;
     }
 
-    setsockopt(s0, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)); // ó•tƒ\ƒPƒbƒg‚ğÄ—˜—p‰Â”\‚É‚·‚é
+    setsockopt(s0, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)); // å—ä»˜ã‚½ã‚±ãƒƒãƒˆã‚’å†åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹
 
-    /*ó•tƒ\ƒPƒbƒgİ’è ƒ|[ƒg”Ô† 8080*/
+    /*å—ä»˜ã‚½ã‚±ãƒƒãƒˆè¨­å®š ãƒãƒ¼ãƒˆç•ªå· 8080*/
     addr.sin_family = AF_INET;   // IPv4
-    addr.sin_port = htons(8080); // htons:ƒoƒCƒgƒI[ƒ_[‚ğƒlƒbƒg—p‚É•ÏŠ·
+    addr.sin_port = htons(8080); // htons:ãƒã‚¤ãƒˆã‚ªãƒ¼ãƒ€ãƒ¼ã‚’ãƒãƒƒãƒˆç”¨ã«å¤‰æ›
 
     addr.sin_addr.s_addr = INADDR_ANY;
 
-    /* ƒ\ƒPƒbƒg‚É–¼‘O‚ğ•t‚¯‚é(ƒAƒhƒŒƒX‚ğŠ„‚è“–‚Ä‚é) */
+    /* ã‚½ã‚±ãƒƒãƒˆã«åå‰ã‚’ä»˜ã‘ã‚‹(ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å‰²ã‚Šå½“ã¦ã‚‹) */
     if ((bind(s0, (struct sockaddr *)&addr, sizeof(addr))) < 0)
     {
         perror("bind");
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    /* Ú‘±‘Ò‚¿ */
+    /* æ¥ç¶šå¾…ã¡ */
     if (listen(s0, 10) < 0)
     {
         perror("listen");
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    /* Ú‘±ó•t */
+    /* æ¥ç¶šå—ä»˜ */
     while (1)
     {
         if ((s1 = accept(s0, (struct sockaddr *)&clnt, &l_clnt)) < 0)
@@ -64,29 +64,29 @@ int main(int argc, char *argv[])
             return 1;
         }
 
-        /* HTTPƒŠƒNƒGƒXƒg‚ğóM */
+        /* HTTPãƒªã‚¯ã‚¨ã‚¹ãƒˆã‚’å—ä¿¡ */
         m = read(s1, str_in, sizeof(str_in));
 
-        /* ‰“šƒƒbƒZ[ƒWì¬ */
-        /* ‚Ü‚¸HTML‚Å’†g‚ğ‹Lq */
+        /* å¿œç­”ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ä½œæˆ */
+        /* ã¾ãšHTMLã§ä¸­èº«ã‚’è¨˜è¿° */
         snprintf(content, sizeof(content), "%s", contentstr);
 
         snprintf(content, sizeof(content),
 "<html><body>\r\n\
-‚ ‚È‚½‚Ì‘—‚Á‚½HTTPƒŠƒNƒGƒXƒg‚ÍˆÈ‰º‚Ì’Ê‚è‚Å‚·B\r\n\
-<pre>%s</pre>", contentstr);
+<h1>Hello World! Hoge Hoge Foo Bar!</h1>\r\n\
+</body></html>");
 
-        /* ƒwƒbƒ_‚Æ’†g‚Å‰“šƒƒbƒZ[ƒW */
+        /* ãƒ˜ãƒƒãƒ€ã¨ä¸­èº«ã§å¿œç­”ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ */
         // snprintf(str_out, sizeof(str_out),"%s" ,strlen(content) + 1, contentstr);
 
-        /* ‰“šƒƒbƒZ[ƒW‚ğ‘—M */
+        /* å¿œç­”ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä¿¡ */
         write(s1, str_out, strlen(str_out) + 1);
 
-        /* Ú‘±‚ğØ’f */
+        /* æ¥ç¶šã‚’åˆ‡æ–­ */
         close(s1);
     }
 
-    /* ó•tƒ\ƒPƒbƒg‚ğ•Â‚¶‚é */
+    /* å—ä»˜ã‚½ã‚±ãƒƒãƒˆã‚’é–‰ã˜ã‚‹ */
     close(s0);
 
     return 0;
